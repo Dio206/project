@@ -18,13 +18,19 @@ def index(request):
 
     try:
         excel_file = request.FILES['excel_file']
+        if excel_file.size == 0:
+            raise ValueError("Вы загрузили пустой файл.")
+
         df = pd.read_excel(excel_file)
         
-        df.columns = df.columns.str.strip()
+        if df.empty:
+            raise ValueError("В файле нет данных для обработки.")
 
+        df.columns = df.columns.str.strip()
         col_length = 'Протяженность, км'
+        
         if col_length not in df.columns:
-            raise ValueError(f"Колонка '{col_length}' не найдена в файле.")
+            raise ValueError(f"Колонка '{col_length}' не найдена. Проверьте заголовки в Excel.")
 
         df[col_length] = pd.to_numeric(
             df[col_length].astype(str).str.replace(',', '.'), 
@@ -42,15 +48,7 @@ def index(request):
             doc.add_heading('Аналитическое резюме', level=2)
             p = doc.add_paragraph(ai_result)
             p.alignment = 3
-
-        doc = Document()
-        doc.add_heading('Отчет по автомобильным дорогам', level=1)
-        
-        if ai_result:
-            doc.add_heading('Аналитическое резюме', level=2)
-            p = doc.add_paragraph(ai_result)
-            p.alignment = 3
-            doc.add_paragraph("") 
+            doc.add_paragraph("")
 
         doc.add_paragraph("Таблица 1 - Перечень и характеристика автомобильных дорог")
         

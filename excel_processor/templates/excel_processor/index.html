@@ -35,7 +35,7 @@
                 {% csrf_token %}
                 
                 <div class="mb-3">
-                    {{ form.excel_file }}
+                    <input type="file" name="excel_file" accept=".xlsx, .xls" class="form-control" id="id_excel_file" required>
                 </div>
 
                 <div class="d-grid gap-2">
@@ -49,5 +49,17 @@
             
         </div>
     </div>
+    <script>
+    const form = document.querySelector('form');
+    const btn = form.querySelector('button');
+
+    form.onsubmit = function() {
+        btn.disabled = true; 
+        btn.innerHTML = `
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            ИИ создает отчет...
+        `;
+    };
+</script>
 </body>
 </html>
