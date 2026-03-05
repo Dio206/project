@@ -3,3 +3,6 @@ pandas
 openpyxl
 python-docx
 django-bootstrap5
+python-dotenv
+openai
+gunicorn
