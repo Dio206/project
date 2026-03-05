@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Результат обработки</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #ffffff; } 
+        .result-card { max-width: 600px; margin: 80px auto; border-radius: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card result-card p-5 text-center">
+            <div class="mb-4">
+                <span style="font-size: 50px;">✅</span>
+            </div>
+            <h2 class="text-success mb-3">Готово!</h2>
+            
+            <div class="alert alert-info py-3 mb-4">
+                <h5 class="mb-0">{{ summary }}</h5>
+            </div>
+
+            
+            <div class="d-grid gap-2">
+                <a href="{{ report_url }}" class="btn btn-success btn-lg" download>
+                    Скачать отчет
+                </a>
+                
+                <a href="/" class="btn btn-link mt-2 text-decoration-none">
+                    Загрузить другой файл
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

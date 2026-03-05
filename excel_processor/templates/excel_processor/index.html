@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Загрузка данных о дорогах</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .upload-card { max-width: 600px; margin: 50px auto; border-radius: 15px; border: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card upload-card p-4">
+            <h2 class="text-center mb-4">Система обработки дорожных данных</h2>
+            <p class="text-muted text-center">Загрузите Excel-файл для автоматического расчета протяженности и генерации Word-отчета.</p>
+            
+            
+
+            {% if error %}
+                <div class="alert alert-danger border-0">
+                    <strong>Ошибка:</strong> {{ error }}
+                </div>
+            {% endif %}
+
+            {% if form.errors %}
+                <div class="alert alert-warning border-0">
+                    <strong>Форма заполнена неверно:</strong>
+                    {{ form.errors }}
+                </div>
+            {% endif %}
+
+            <form method="post" enctype="multipart/form-data" class="mt-1 text-center">
+                {% csrf_token %}
+                
+                <div class="mb-3">
+                    {{ form.excel_file }}
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        Cоздать отчет
+                    </button>
+                </div>
+                
+            </form>
+
+            
+        </div>
+    </div>
+</body>
+</html>
